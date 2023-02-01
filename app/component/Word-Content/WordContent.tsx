@@ -37,7 +37,7 @@ const SearchResult: React.FC<WordConentProps> = ({wordDetails,loading}) => {
                                                     <i className="ri-play-fill text-[30px] "></i>
                                                 </button>
                                                 <audio ref={audioRef}
-                                                       src={item.phonetics[0]?.audio || item.phonetics[1].audio}></audio>
+                                                       src={item.phonetics[1]?.audio}></audio>
                                             </div>
                                         </section>
                                         <section className={"container-app flex items-center md:w-full"}>

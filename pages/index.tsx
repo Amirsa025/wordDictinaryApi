@@ -18,7 +18,7 @@ const Home: NextPage = () => {
             ),
 
     })
-    
+
     useEffect(()=>{
         refetch()
     },[term])
