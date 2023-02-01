@@ -9,7 +9,6 @@ const Search: React.FC<IsearchProps> = ({onChangeHandler}) => {
         e.preventDefault()
         // @ts-ignore
         onChangeHandler(text)
-        setText('')
     }
     return (
         <form onSubmit={onTextSubmit} className="bg-gray-200 rounded-[20px] h-[60px]  dark:bg-[#3a3a3a] flex items-center justify-between">
