@@ -89,7 +89,6 @@ const SearchResult: React.FC<WordConentProps> = ({wordDetails,loading}) => {
                                 )
                         })
                     }
-
                 </>)
 
             }
