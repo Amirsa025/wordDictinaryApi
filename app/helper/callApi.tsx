@@ -12,7 +12,6 @@ const callApi = () => {
         },
         err => { throw err }
     )
-
     axiosInstance.interceptors.response.use(
         res => {
             return res;
@@ -24,8 +23,6 @@ const callApi = () => {
                     throw new ValidationError(res.data.errors)
                 }
             }
-
-
             throw err;
         }
     )
