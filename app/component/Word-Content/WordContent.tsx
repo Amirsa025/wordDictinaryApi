@@ -21,7 +21,7 @@ const SearchResult: React.FC<WordConentProps> = ({wordDetails,status,error,isFet
                         <PuffLoader color="#36d7b7" />
                     </div>
                 ) : status === "error" ? (
-                    <span className={"flex items-center justify-center text-red-500"}>"keyowrd is not found"</span>
+                    <span className={"flex items-center justify-center text-red-500"} > keyowrd is not found </span>
                 )  :
                 (<>
                     {
