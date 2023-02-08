@@ -3,9 +3,11 @@ import {PuffLoader} from "react-spinners";
 
 interface WordConentProps {
     wordDetails: any;
-    loading: boolean;
+    status: string;
+    error: any;
+    isFetching: any;
 }
-const SearchResult: React.FC<WordConentProps> = ({wordDetails,loading}) => {
+const SearchResult: React.FC<WordConentProps> = ({wordDetails,status,error,isFetching}) => {
 
     const audioRef = useRef(null)
     const handleClick = () => {
@@ -14,16 +16,19 @@ const SearchResult: React.FC<WordConentProps> = ({wordDetails,loading}) => {
     }
     return (
         <div>
-            {loading ? (
+            {status === "loading"  ? (
                     <div className='flex items-center justify-center'>
                         <PuffLoader color="#36d7b7" />
                     </div>
-                ) :
+                ) : status === "error" ? (
+                    <span className={"flex items-center justify-center text-red-500"}>"keyowrd is not found"</span>
+                )  :
                 (<>
                     {
                         wordDetails.map((item: any,id:any) =>{
                                 return (
                                     <div key={id}>
+                                        <div>{isFetching ? <div className="flex items-center justify-center "></div>: ""}</div>
                                         <section className={"px-10 md:px-[200px] py-8 flex items-center justify-between"}>
                                             <div>
                                                 <div
@@ -38,6 +43,7 @@ const SearchResult: React.FC<WordConentProps> = ({wordDetails,loading}) => {
                                                 </button>
                                                 <audio ref={audioRef}
                                                        src={item.phonetics[1]?.audio}></audio>
+
                                             </div>
                                         </section>
                                         <section className={"container-app flex items-center md:w-full"}>
@@ -90,7 +96,6 @@ const SearchResult: React.FC<WordConentProps> = ({wordDetails,loading}) => {
                         })
                     }
                 </>)
-
             }
         </div>
     );

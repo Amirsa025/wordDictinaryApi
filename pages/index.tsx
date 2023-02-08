@@ -1,5 +1,5 @@
 import type {NextPage} from 'next'
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import Navbar from '../app/component/Navbar/Navbar';
 import WordContent from "../app/component/Word-Content/WordContent";
 import callApi from "../app/helper/callApi";
@@ -8,9 +8,9 @@ import SearchKeyWord from "../app/component/Search";
 
 const Home: NextPage = () => {
     const [darkToggle, setDarkToggle] = useState(false)
-    const [fontFamily, setFontFamily] = useState('serif')
+    const [fontFamily, setFontFamily] = useState('Monospace')
     const [term, setTerm] = useState('dictionary')
-    const { isLoading, data,status,} = useQuery({
+    const { status, data,error,isFetching} = useQuery({
         queryKey: ['SearchKey',term],
         queryFn: async () =>
            await callApi().get(`/v2/entries/en/${term}`).then(
@@ -20,10 +20,9 @@ const Home: NextPage = () => {
     })
 
 
-    const handleChangeFont = (e: { target: { value: React.SetStateAction<string>; }; }) => {
-        setFontFamily(e.target.value)
-    }
-
+    useEffect(()=>{
+        setTerm(term)
+    },[])
     const onSearchedWord = (text: React.SetStateAction<string>) => {
         setTerm(text)
     }
@@ -32,12 +31,13 @@ const Home: NextPage = () => {
             <main className={"dark:bg-black min-h-screen"} style={{fontFamily}}>
                 <Navbar darkToggle={darkToggle}
                         fontFamily={fontFamily}
-                        handleChange={handleChangeFont}
+                        handleChange={(event: { target: { value: React.SetStateAction<string>; }})=>setFontFamily(event.target.value)}
                         setDarkToggle={() => setDarkToggle(!darkToggle)}/>
                 <section className={"container-app w-"} id="search">
                     <SearchKeyWord onChangeHandler={onSearchedWord}/>
                 </section>
-                <WordContent loading={isLoading}  wordDetails={data} />
+
+                <WordContent isFetching={isFetching} status={status}  error={error} wordDetails={data} />
             </main>
         </div>
     )

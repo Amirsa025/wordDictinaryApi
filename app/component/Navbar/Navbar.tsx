@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import Toggles from "../../ui/Toggle/toggle";
 interface INavProps {
     darkToggle:boolean,
-    setDarkToggle:any,
+    setDarkToggle:()=>void,
     handleChange:any,
     fontFamily:string,
 

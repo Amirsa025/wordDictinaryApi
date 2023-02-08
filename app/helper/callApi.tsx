@@ -19,7 +19,7 @@ const callApi = () => {
         err => {
             const res = err?.response
             if(res) {
-                if(res.status === 422) {
+                if(res.status === 404) {
                     throw new ValidationError(res.data.errors)
                 }
             }
